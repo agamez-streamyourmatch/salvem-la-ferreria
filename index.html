@@ -1,62 +1,69 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Salvem la Ferreria - Recollida de Signatures</title>
+  <title>Salvem la Ferreria - Recogida de Firmas</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- SDK oficial de Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-  <!-- Capçalera -->
-  <header class="bg-slate-900 text-white py-10 px-4 shadow-md">
+  <!-- Selector de Idioma -->
+  <nav class="bg-slate-900 border-b border-slate-800 px-4 py-2">
+    <div class="max-w-3xl mx-auto flex justify-end items-center space-x-2 text-sm text-slate-300">
+      <span class="text-xs uppercase font-semibold text-slate-400 mr-1">Idioma / Language:</span>
+      <button onclick="setLanguage('es')" id="btn-es" class="px-2 py-1 rounded font-bold bg-red-600 text-white">ES</button>
+      <button onclick="setLanguage('en')" id="btn-en" class="px-2 py-1 rounded font-bold hover:bg-slate-800 text-slate-300">EN</button>
+    </div>
+  </nav>
+
+  <!-- Encabezado -->
+  <header class="bg-slate-900 text-white pb-10 pt-6 px-4 shadow-md">
     <div class="max-w-3xl mx-auto text-center">
-      <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Associació Veïnal</span>
+      <span id="badge-title" class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Asociación Vecinal</span>
       <h1 class="text-3xl md:text-5xl font-extrabold mt-3 leading-tight">Salvem la Ferreria</h1>
-      <p class="mt-4 text-slate-300 text-base md:text-lg">
-        Ens oposem a la construcció d'edificis que eliminaran l'aparcament del barri. Assegurem l'accessibilitat i la qualitat de vida dels nostres veïns.
+      <p id="hero-desc" class="mt-4 text-slate-300 text-base md:text-lg">
+        Nos oponemos a la construcción de edificios que eliminarán el aparcamiento del barrio. Defendemos la accesibilidad y la calidad de vida de nuestros vecinos.
       </p>
     </div>
   </header>
 
   <main class="max-w-3xl mx-auto px-4 py-8">
     
-    <!-- Contingut explicatiu -->
+    <!-- Contenido explicativo -->
     <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
-      <h2 class="text-xl font-bold mb-3 text-slate-900">Per què necessitem la teva signatura?</h2>
+      <h2 id="why-title" class="text-xl font-bold mb-3 text-slate-900">¿Por qué necesitamos tu firma?</h2>
       <ul class="space-y-2 text-sm md:text-base text-slate-700">
-        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✓</span> Pérdua total de les places d'aparcament en superfície actuals.</li>
-        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✓</span> Col·lapse del trànsit als carrers adjacents.</li>
-        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✓</span> Exigim a l'Ajuntament una paralització del projecte i alternatives viables.</li>
+        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✓</span> <span id="reason-1">Pérdida total de las plazas de aparcamiento en superficie actuales.</span></li>
+        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✓</span> <span id="reason-2">Colapso del tráfico en las calles adyacentes.</span></li>
+        <li class="flex items-start"><span class="text-red-500 font-bold mr-2">✓</span> <span id="reason-3">Exigimos al Ayuntamiento la paralización del proyecto y alternativas viables.</span></li>
       </ul>
     </section>
 
-    <!-- Formulari de Signatura -->
+    <!-- Formulario de Firma -->
     <section class="bg-white p-6 md:p-8 rounded-xl shadow-md border border-slate-200">
-      <h2 class="text-2xl font-bold mb-6 text-slate-900 text-center">Signa la petició veïnal</h2>
+      <h2 id="form-title" class="text-2xl font-bold mb-6 text-slate-900 text-center">Firma la petición vecinal</h2>
       
       <form id="signature-form" class="space-y-4">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Nom *</label>
+            <label id="lbl-nom" class="block text-sm font-medium text-slate-700 mb-1">Nombre *</label>
             <input type="text" id="nom" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-slate-300">
           </div>
           <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Cognoms *</label>
+            <label id="lbl-cognoms" class="block text-sm font-medium text-slate-700 mb-1">Apellidos *</label>
             <input type="text" id="cognoms" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-slate-300">
           </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">DNI / NIE *</label>
+            <label id="lbl-dni" class="block text-sm font-medium text-slate-700 mb-1">DNI / NIE *</label>
             <input type="text" id="dni" required placeholder="12345678X" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-slate-300">
-            <p class="text-xs text-slate-400 mt-1">Imprescindible per a la validesa legal davant l'Ajuntament.</p>
+            <p id="dni-help" class="text-xs text-slate-400 mt-1">Imprescindible para la validez legal ante el Ayuntamiento.</p>
           </div>
           <div>
-            <label class="block text-sm font-medium text-slate-700 mb-1">Correu Electrònic *</label>
+            <label id="lbl-email" class="block text-sm font-medium text-slate-700 mb-1">Correo Electrónico *</label>
             <input type="email" id="email" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none border-slate-300">
           </div>
         </div>
@@ -64,12 +71,12 @@
         <div class="pt-2">
           <label class="flex items-start space-x-2 text-xs text-slate-600 cursor-pointer">
             <input type="checkbox" required class="mt-0.5 rounded text-blue-600 focus:ring-blue-500">
-            <span>Acepto la Política de Privacidad. Mis datos se utilizarán exclusivamente para respaldar esta petición ante las instituciones públicas (RGPD).</span>
+            <span id="privacy-text">Acepto la Política de Privacidad. Mis datos se utilizarán exclusivamente para respaldar esta petición ante las instituciones públicas (RGPD).</span>
           </label>
         </div>
 
         <button type="submit" id="submit-btn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200 text-lg shadow-md">
-          Signar la Petició
+          Firmar la Petición
         </button>
       </form>
 
@@ -78,15 +85,87 @@
 
   </main>
 
-  <footer class="text-center py-6 text-xs text-slate-500 border-t border-slate-200 mt-12">
-    &copy; Associació Veïnal Salvem la Ferreria. Plataforma independent sense ànim de lucre.
+  <footer id="footer-text" class="text-center py-6 text-xs text-slate-500 border-t border-slate-200 mt-12">
+    &copy; Asociación Vecinal Salvem la Ferreria. Plataforma independiente sin ánimo de lucro.
   </footer>
 
   <script>
-    // Inicialitzar Supabase
-    const SUPABASE_URL = 'TU_SUPABASE_URL';
-    const SUPABASE_KEY = 'TU_SUPABASE_ANON_KEY';
-    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // Pegar aquí la URL que generaste en Apps Script
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwcZB11H3Oh_KSmltL0-TSAm8UeQakPRsaCN88zJv8byE6WqdZ3_oChhpTmjmdy58jcgw/exec';
+
+    const translations = {
+      es: {
+        badge: "Asociación Vecinal",
+        heroDesc: "Nos oponemos a la construcción de edificios que eliminarán el aparcamiento del barrio. Defendemos la accesibilidad y la calidad de vida de nuestros vecinos.",
+        whyTitle: "¿Por qué necesitamos tu firma?",
+        reason1: "Pérdida total de las plazas de aparcamiento en superficie actuales.",
+        reason2: "Colapso del tráfico en las calles adyacentes.",
+        reason3: "Exigimos al Ayuntamiento la paralización del proyecto y alternativas viables.",
+        formTitle: "Firma la petición vecinal",
+        lblNom: "Nombre *",
+        lblCognoms: "Apellidos *",
+        lblDni: "DNI / NIE *",
+        dniHelp: "Imprescindible para la validez legal ante el Ayuntamiento.",
+        lblEmail: "Correo Electrónico *",
+        privacy: "Acepto la Política de Privacidad. Mis datos se utilizarán exclusivamente para respaldar esta petición ante las instituciones públicas (RGPD).",
+        btnSubmit: "Firmar la Petición",
+        footer: "© Asociación Vecinal Salvem la Ferreria. Plataforma independiente sin ánimo de lucro.",
+        msgSuccess: "¡Gracias por firmar! Tu firma se ha registrado correctamente en nuestra base de datos.",
+        msgError: "Error al enviar la firma. Por favor, inténtalo de nuevo.",
+        msgSending: "Guardando firma..."
+      },
+      en: {
+        badge: "Neighborhood Association",
+        heroDesc: "We oppose the construction of buildings that will remove our neighborhood parking lot. We stand for accessibility and the quality of life of our residents.",
+        whyTitle: "Why do we need your signature?",
+        reason1: "Total loss of existing street-level parking spaces.",
+        reason2: "Traffic congestion in adjacent streets.",
+        reason3: "We demand the City Council to halt the project and provide viable alternatives.",
+        formTitle: "Sign the petition",
+        lblNom: "First Name *",
+        lblCognoms: "Last Name *",
+        lblDni: "ID / DNI / Passport *",
+        dniHelp: "Required for legal validity before the City Council.",
+        lblEmail: "Email Address *",
+        privacy: "I accept the Privacy Policy. My data will be used exclusively to support this petition before public institutions (GDPR).",
+        btnSubmit: "Sign the Petition",
+        footer: "© Neighborhood Association Salvem la Ferreria. Independent non-profit platform.",
+        msgSuccess: "Thank you for signing! Your signature has been registered successfully.",
+        msgError: "Error sending your signature. Please try again.",
+        msgSending: "Saving signature..."
+      }
+    };
+
+    let currentLang = 'es';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+
+      document.getElementById('badge-title').innerText = t.badge;
+      document.getElementById('hero-desc').innerText = t.heroDesc;
+      document.getElementById('why-title').innerText = t.whyTitle;
+      document.getElementById('reason-1').innerText = t.reason1;
+      document.getElementById('reason-2').innerText = t.reason2;
+      document.getElementById('reason-3').innerText = t.reason3;
+      document.getElementById('form-title').innerText = t.formTitle;
+      document.getElementById('lbl-nom').innerText = t.lblNom;
+      document.getElementById('lbl-cognoms').innerText = t.lblCognoms;
+      document.getElementById('lbl-dni').innerText = t.lblDni;
+      document.getElementById('dni-help').innerText = t.dniHelp;
+      document.getElementById('lbl-email').innerText = t.lblEmail;
+      document.getElementById('privacy-text').innerText = t.privacy;
+      document.getElementById('submit-btn').innerText = t.btnSubmit;
+      document.getElementById('footer-text').innerText = t.footer;
+
+      if(lang === 'es') {
+        document.getElementById('btn-es').className = "px-2 py-1 rounded font-bold bg-red-600 text-white";
+        document.getElementById('btn-en').className = "px-2 py-1 rounded font-bold hover:bg-slate-800 text-slate-300";
+      } else {
+        document.getElementById('btn-es').className = "px-2 py-1 rounded font-bold hover:bg-slate-800 text-slate-300";
+        document.getElementById('btn-en').className = "px-2 py-1 rounded font-bold bg-red-600 text-white";
+      }
+    }
 
     const form = document.getElementById('signature-form');
     const statusMsg = document.getElementById('status-message');
@@ -95,30 +174,37 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
+      const t = translations[currentLang];
       submitBtn.disabled = true;
-      submitBtn.innerText = 'Enviant...';
+      submitBtn.innerText = t.msgSending;
 
-      const nom = document.getElementById('nom').value;
-      const cognoms = document.getElementById('cognoms').value;
-      const dni = document.getElementById('dni').value.trim().toUpperCase();
-      const email = document.getElementById('email').value.trim();
+      const payload = {
+        nom: document.getElementById('nom').value,
+        cognoms: document.getElementById('cognoms').value,
+        dni: document.getElementById('dni').value.trim().toUpperCase(),
+        email: document.getElementById('email').value.trim()
+      };
 
-      const { data, error } = await _supabase
-        .from('firmas')
-        .insert([{ nom, cognoms, dni, email }]);
+      try {
+        // Envío directo a Google Sheets mediante Apps Script
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Evita restricciones CORS con Google Apps Script
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
 
-      if (error) {
-        statusMsg.className = "mt-4 p-4 rounded-lg text-center font-medium bg-red-100 text-red-700";
-        statusMsg.innerText = "Error en enviar la signatura. Intenta-ho de nou.";
-      } else {
         statusMsg.className = "mt-4 p-4 rounded-lg text-center font-medium bg-green-100 text-green-700";
-        statusMsg.innerText = "Gràcies per signar! La teva signatura s'ha registrat correctament.";
+        statusMsg.innerText = t.msgSuccess;
         form.reset();
+      } catch (error) {
+        statusMsg.className = "mt-4 p-4 rounded-lg text-center font-medium bg-red-100 text-red-700";
+        statusMsg.innerText = t.msgError;
+      } finally {
+        statusMsg.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.innerText = t.btnSubmit;
       }
-      
-      statusMsg.classList.remove('hidden');
-      submitBtn.disabled = false;
-      submitBtn.innerText = 'Signar la Petició';
     });
   </script>
 </body>
